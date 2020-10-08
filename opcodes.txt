@@ -1,0 +1,39 @@
+32 bits
+
+0 -> 15		CONSTANTE
+16		ignoré
+17 -> 19	Arg2
+20 -> 22	Arg1
+23 -> 25	DR/SR
+26		Immédiat
+27 -> 29	Code opération
+30 -> 31	Type opération
+
+Types
+00 -> ALU
+10 -> MEM
+11 -> CTRL
+
+
+Codes
+
+	ALU
+		000 ADD
+		001 SUB
+		010 AND
+		011 OR
+		100 XOR
+		101 SR
+		110 SL
+		111 MUL
+
+	MEM
+		000 LD
+		001 LDai
+		010 LDvi
+
+		100 ST
+		101 STai
+
+Immédiat: 1 si la constante doit être lue comme une valeur, 0 si elle doit être lue comme une adresse ou ignorée.
+
