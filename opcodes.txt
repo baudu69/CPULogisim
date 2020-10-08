@@ -9,8 +9,11 @@
 27 -> 29	Code opération
 30 -> 31	Type opération
 
+
+
 Types
 00 -> ALU
+01 -> NOP (Le processeur ne fait rien)
 10 -> MEM
 11 -> CTRL
 
@@ -35,5 +38,53 @@ Codes
 		100 ST
 		101 STai
 
+	CTRL
+		000 JEQU
+		001 JNEQ
+		010 JPET
+		011 JGRA
+		100 JPEE
+		101 JGRE
+		110 CALL
+		111 RET
+
 Immédiat: 1 si la constante doit être lue comme une valeur, 0 si elle doit être lue comme une adresse ou ignorée.
+
+
+MEM
+
+LD Ra Rb
+	Stocke la valeur à l'adresse [Rb] de la RAM dans Ra
+
+LDai Ra xxxx
+	Stocke la valeur à l'adresse xxxx de la RAM dans Ra
+
+LDvi Ra xxxx
+	Stocke xxxx dans Ra
+
+ST Ra Rb
+	Stocke Ra à l'adresse [Rb] de la RAM
+STai Ra xxxx
+	Stocke Ra à l'adresse xxxx de la RAM
+
+
+CTRL
+
+JEQU Ra Rb xxxx
+	Va à l'adresse xxxx si Ra == Rb
+
+JNEQ Ra Rb xxxx
+	Va à l'adresse xxxx si Ra != Rb
+
+JPET Ra Rb xxxx
+	Va à l'adresse xxxx si Ra < Rb
+
+JGRA Ra Rb xxxx
+	Va à l'adresse xxxx si Ra > Rb
+
+JPEE Ra Rb xxxx
+	Va à l'adresse xxxx si Ra <= Rb
+
+JGRE Ra Rb xxxx
+	Va à l'adresse xxxx si Ra >= Rb
 
