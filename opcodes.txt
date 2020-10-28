@@ -43,8 +43,8 @@ Codes
 		001 JNEQ
 		010 JPET
 		011 JGRA
-		100 JPEE
-		101 JGRE
+		100 JMP
+		101 
 		110 CALL
 		111 RET
 
@@ -82,9 +82,4 @@ JPET Ra Rb xxxx
 JGRA Ra Rb xxxx
 	Va à l'adresse xxxx si Ra > Rb
 
-JPEE Ra Rb xxxx
-	Va à l'adresse xxxx si Ra <= Rb
-
-JGRE Ra Rb xxxx
-	Va à l'adresse xxxx si Ra >= Rb
 
