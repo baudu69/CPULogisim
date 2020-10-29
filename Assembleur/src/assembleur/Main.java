@@ -56,7 +56,7 @@ public class Main {
 
 	private static final List<String> MEM = Arrays.asList("LD", "LDai", "LDvi", "ST", "STai");
 
-	private static final List<String> CTRL = Arrays.asList("JEQU", "JNEQ", "JPET", "JGRA", "JPEE", "JGRE", "CALL", "RET");
+	private static final List<String> CTRL = Arrays.asList("JEQU", "JNEQ", "JPET", "JGRA", "JMP", "CALL", "RET");
 
 	private static void checkReg(String reg) {
 		if (!REGS.contains(reg)) {
@@ -81,6 +81,7 @@ public class Main {
 
 		// Remplace tous les labels par leur valeur
 		for (String label : labelMap.keySet()) {
+			System.out.println(label + " -> " + Integer.toHexString(labelMap.get(label)));
 			for (int i = 0; i < source.length; i++) {
 				source[i] = source[i].replaceAll(label, String.valueOf(labelMap.get(label)));
 			}
@@ -211,6 +212,11 @@ public class Main {
 				}
 			}
 			// </editor-fold>
+			if (instruction.equals("STOP")) {
+				bin = 0b10011;
+				int jmpAddress = i;
+				bin |= jmpAddress << 16;
+			}
 
 			binCode[i] = bin;
 		}
