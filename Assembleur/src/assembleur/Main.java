@@ -182,7 +182,7 @@ public class Main {
 						opcode = 0b111;
 						break;
 					default:
-						CTRL.indexOf(instruction);
+						opcode = CTRL.indexOf(instruction);
 						break;
 				}
 				bin |= opcode << 2;
