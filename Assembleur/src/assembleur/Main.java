@@ -88,12 +88,7 @@ public class Main {
 		}
 
 		// <editor-fold desc="Calcul labels">
-		Stream<String> sortedLabels = labelMap.keySet().stream().sorted(new Comparator<String>() {
-			@Override
-			public int compare(String o1, String o2) {
-				return o2.length() - o1.length();
-			}
-		});
+		Stream<String> sortedLabels = labelMap.keySet().stream().sorted((string1, string2) -> string2.length() - string1.length());
 
 		sortedLabels.forEach(label -> {
 			System.out.println(label + " -> " + Integer.toHexString(labelMap.get(label)));
@@ -178,7 +173,7 @@ public class Main {
 						break;
 					case "LDvi":
 					case "LDai":
-					case "STvi":
+					case "STai":
 						int value = Integer.parseInt(tokens[2], 16);
 						bin |= value << 16;
 						break;
