@@ -2,7 +2,7 @@
 ;R0 : entree prog
 ;R1 : Resultat
 ;R2 : Constant = a 1
-start: LDvi R0 5
+start: LDvi R0 7
     LDvi R1 1
     LDvi R2 1
     CALL facto
