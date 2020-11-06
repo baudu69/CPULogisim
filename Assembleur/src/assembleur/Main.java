@@ -13,19 +13,26 @@ Syntaxe assembleur :
 public class Main {
 
 	private static void printHelp() {
-		System.out.println("OUI.");
+		System.err.println("java -jar Assembleur.jar fichierIN fichierOUT");
 	}
 
-	public static void main(String[] args) throws IOException {
-		if (args.length == 0) {
-			printHelp();
-		} else if (args.length == 1) {
-			printHelp();
-		} else if (args.length == 2) {
+	public static void main(String[] args) {
+		if (args.length == 2) {
 			String[] source = new String[0];
-			source = readSourceFile(new File(args[0]));
+			try {
+				source = readSourceFile(new File(args[0]));
+			} catch (IOException e) {
+				System.err.println("Erreur lors de la lecture du fichier source");
+				e.printStackTrace();
+				return;
+			}
 			int[] binCode = assemble(source);
-			writeBinFile(binCode, new File(args[1]));
+			try {
+				writeBinFile(binCode, new File(args[1]));
+			} catch (IOException e) {
+				System.err.println("Erreur lors de l'écriture du fichier binaire");
+				e.printStackTrace();
+			}
 		} else {
 			printHelp();
 		}
