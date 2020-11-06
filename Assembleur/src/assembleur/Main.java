@@ -2,6 +2,7 @@ package assembleur;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Stream;
 
 /*
 
@@ -18,7 +19,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		if (args.length == 2) {
-			String[] source = new String[0];
+			String[] source;
 			try {
 				source = readSourceFile(new File(args[0]));
 			} catch (IOException e) {
@@ -86,13 +87,21 @@ public class Main {
 			source[address] = source[address].replaceFirst("^.*:\\s+", "");
 		}
 
-		// Remplace tous les labels par leur valeur
-		for (String label : labelMap.keySet()) {
+		// <editor-fold desc="Calcul labels">
+		Stream<String> sortedLabels = labelMap.keySet().stream().sorted(new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return o2.length() - o1.length();
+			}
+		});
+
+		sortedLabels.forEach(label -> {
 			System.out.println(label + " -> " + Integer.toHexString(labelMap.get(label)));
 			for (int i = 0; i < source.length; i++) {
 				source[i] = source[i].replaceAll(label, String.valueOf(labelMap.get(label)));
 			}
-		}
+		});
+		// </editor-fold>
 
 		for (int i = 0; i < source.length; i++) {
 			String[] tokens = source[i].split("\\s+");
@@ -180,7 +189,7 @@ public class Main {
 			else if (CTRL.contains(instruction)) {
 				bin = 0b11;
 
-				int opcode = 0;
+				int opcode;
 				switch (instruction) {
 					case "CALL":
 						opcode = 0b110;
@@ -221,8 +230,7 @@ public class Main {
 			// </editor-fold>
 			if (instruction.equals("STOP")) {
 				bin = 0b10011;
-				int jmpAddress = i;
-				bin |= jmpAddress << 16;
+				bin |= i << 16;
 			}
 
 			binCode[i] = bin;
