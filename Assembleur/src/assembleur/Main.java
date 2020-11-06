@@ -93,7 +93,7 @@ public class Main {
 		sortedLabels.forEach(label -> {
 			System.out.println(label + " -> " + Integer.toHexString(labelMap.get(label)));
 			for (int i = 0; i < source.length; i++) {
-				source[i] = source[i].replaceAll(label, String.valueOf(labelMap.get(label)));
+				source[i] = source[i].replaceAll(label, Integer.toHexString(labelMap.get(label)));
 			}
 		});
 		// </editor-fold>
